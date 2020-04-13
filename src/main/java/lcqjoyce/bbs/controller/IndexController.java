@@ -20,17 +20,22 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("token")) {
-                String value = cookie.getValue();
-                User user = userService.findByToken(value);
-                if (user != null) {
-                    request.getSession().setAttribute("user", user);
+        try {
+            Cookie[] cookies = request.getCookies();
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")) {
+                    String value = cookie.getValue();
+                    User user = userService.findByToken(value);
+                    if (user != null) {
+                        System.out.println("已有登录用户"+user.getName());
+                        request.getSession().setAttribute("user", user);
+                    }
+                    break;
                 }
-                break;
-            }
 
+            }
+        } catch (NullPointerException e) {
+            System.out.println("未登录");
         }
         return "index";
     }

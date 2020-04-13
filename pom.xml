@@ -45,6 +45,7 @@
             <version>1.16.18</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
@@ -52,16 +53,16 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>fastjson</artifactId>
-        <version>1.2.57</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.57</version>
         </dependency>
 
         <!-- MySQL 连接驱动依赖 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.21</version>
+            <version>8.0.12</version>
         </dependency>
 
         <!-- SpringBoot Mybatis 依赖 -->
@@ -71,8 +72,6 @@
             <version>2.0.1</version>
         </dependency>
 
-
-
     </dependencies>
 
     <build>
@@ -80,6 +79,25 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>5.2.4</version>
+                <configuration>
+                    <url>
+                        <![CDATA[jdbc:mysql://39.97.100.234:3306/community?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC]]>
+                    </url>
+                    <user>root</user>
+                    <password>Lcq@1223</password>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.12</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
         <resources>

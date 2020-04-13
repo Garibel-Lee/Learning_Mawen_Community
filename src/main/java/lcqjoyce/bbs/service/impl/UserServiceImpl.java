@@ -1,12 +1,15 @@
 package lcqjoyce.bbs.service.impl;
 
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
 import lcqjoyce.bbs.mapper.UserMapper;
 import lcqjoyce.bbs.entity.User;
 import lcqjoyce.bbs.service.UserService;
+
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
@@ -33,6 +36,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findByToken(String token) {
+        System.out.println("查询该token：" + token + " 是否存在");
         return userMapper.findByToken(token);
     }
 
