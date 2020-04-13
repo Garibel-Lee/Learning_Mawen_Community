@@ -1,8 +1,5 @@
-package lcqjoyce.bbs.demo;
+package lcqjoyce.bbs;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

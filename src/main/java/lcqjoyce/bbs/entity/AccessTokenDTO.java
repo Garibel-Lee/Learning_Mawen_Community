@@ -1,4 +1,4 @@
-package lcqjoyce.bbs.demo.dto;
+package lcqjoyce.bbs.entity;
 
 
 import lombok.Data;

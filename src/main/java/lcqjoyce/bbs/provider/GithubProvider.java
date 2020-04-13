@@ -1,8 +1,8 @@
-package lcqjoyce.bbs.demo.provider;
+package lcqjoyce.bbs.provider;
 
 import com.alibaba.fastjson.JSON;
-import lcqjoyce.bbs.demo.dto.AccessTokenDTO;
-import lcqjoyce.bbs.demo.dto.GithubUser;
+import lcqjoyce.bbs.entity.AccessTokenDTO;
+import lcqjoyce.bbs.entity.GithubUserDTO;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 
@@ -32,14 +32,14 @@ public class GithubProvider {
         return null;
     }
 
-    public GithubUser gerUser(String accessToken) {
+    public GithubUserDTO gerUser(String accessToken) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("https://api.github.com/user?access_token="+accessToken)
                 .build();
         try (Response response = client.newCall(request).execute()) {
             //得到的是json字符串，因此需要转为GithubUser对象
-            return JSON.parseObject(response.body().string(), GithubUser.class);
+            return JSON.parseObject(response.body().string(), GithubUserDTO.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

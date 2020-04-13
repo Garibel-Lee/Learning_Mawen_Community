@@ -1,17 +1,18 @@
-package lcqjoyce.bbs.demo.controller;
+package lcqjoyce.bbs.controller;
 
 
-import lcqjoyce.bbs.demo.dto.AccessTokenDTO;
-import lcqjoyce.bbs.demo.dto.GithubUser;
-import lcqjoyce.bbs.demo.provider.GithubProvider;
+import lcqjoyce.bbs.entity.AccessTokenDTO;
+import lcqjoyce.bbs.entity.GithubUserDTO;
+import lcqjoyce.bbs.provider.GithubProvider;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author LCQJOYCE
@@ -32,12 +33,11 @@ public class AuthorizeController {
     @Value("${github.redirect.uri}")
     private String redirectUri;
 
-
-
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
-                           @RequestParam(name = "state") String state) {
-
+                           @RequestParam(name = "state") String state,
+        //spring 自适应
+        HttpServletRequest request) {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
         accessTokenDTO.setClient_secret(clientSecret);
@@ -46,10 +46,16 @@ public class AuthorizeController {
         accessTokenDTO.setState(state);
         String accessToken=githubProvider.getAccessToken(accessTokenDTO);
         System.out.println("accessToken:"+accessToken);
-        GithubUser user = githubProvider.gerUser(accessToken);
+        GithubUserDTO user = githubProvider. gerUser(accessToken);
         System.out.println(user.toString());
-        return "index";
+        if(user!=null){
+            request.getSession().setAttribute("user",user);
+            return  "redirect:/";
 
+        }else {
+            //登陆失败请重新登陆
+            return  "redirect:/";
+        }
     }
 
 }

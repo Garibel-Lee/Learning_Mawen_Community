@@ -1,4 +1,4 @@
-package lcqjoyce.bbs.demo;
+package lcqjoyce.bbs;
 
 
 import org.springframework.stereotype.Controller;
