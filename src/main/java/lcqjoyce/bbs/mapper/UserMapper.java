@@ -22,4 +22,7 @@ public interface UserMapper {
     User findByToken(@Param("token")String token);
 
 
+    User findById(@Param("id")Long id);
+
+
 }

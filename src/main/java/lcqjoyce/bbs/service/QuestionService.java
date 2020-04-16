@@ -1,6 +1,8 @@
 package lcqjoyce.bbs.service;
 
+import lcqjoyce.bbs.dto.PageinfoDTO;
 import lcqjoyce.bbs.entity.Question;
+
 public interface QuestionService{
 
 
@@ -16,4 +18,6 @@ public interface QuestionService{
 
     int updateByPrimaryKey(Question record);
 
+
+    PageinfoDTO getAll(Integer page, Integer size);
 }

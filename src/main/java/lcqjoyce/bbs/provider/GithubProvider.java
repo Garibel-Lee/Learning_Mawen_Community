@@ -1,8 +1,8 @@
 package lcqjoyce.bbs.provider;
 
 import com.alibaba.fastjson.JSON;
-import lcqjoyce.bbs.entity.AccessTokenDTO;
-import lcqjoyce.bbs.entity.GithubUserDTO;
+import lcqjoyce.bbs.dto.AccessTokenDTO;
+import lcqjoyce.bbs.dto.GithubUserDTO;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 

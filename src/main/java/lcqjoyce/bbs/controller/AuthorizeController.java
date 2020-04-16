@@ -1,8 +1,8 @@
 package lcqjoyce.bbs.controller;
 
 
-import lcqjoyce.bbs.entity.AccessTokenDTO;
-import lcqjoyce.bbs.entity.GithubUserDTO;
+import lcqjoyce.bbs.dto.AccessTokenDTO;
+import lcqjoyce.bbs.dto.GithubUserDTO;
 import lcqjoyce.bbs.entity.User;
 import lcqjoyce.bbs.provider.GithubProvider;
 
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
@@ -55,7 +54,7 @@ public class AuthorizeController {
         System.out.println("accessToken:"+accessToken);
         GithubUserDTO githubUserDTO = githubProvider. gerUser(accessToken);
         System.out.println(githubUserDTO.toString());
-        if(githubUserDTO!=null){
+        if(githubUserDTO!=null && githubUserDTO.getId()!=null){
             User user = new User();
             user.setAccountId(String.valueOf(githubUserDTO.getId()));
             user.setName(githubUserDTO.getName());
@@ -64,6 +63,7 @@ public class AuthorizeController {
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             user.setBio(githubUserDTO.getBio());
+            user.setAvatarUrl(githubUserDTO.getAvatarUrl());
             System.out.println(userService.insert(user));
             response.addCookie(new Cookie("token",token));
             return  "redirect:/";
@@ -73,6 +73,5 @@ public class AuthorizeController {
             return  "redirect:/";
         }
     }
-
 }
 
