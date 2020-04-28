@@ -11,7 +11,11 @@ body {
     float: right;
     margin-bottom: 15px;
 }
-
+.comments{
+    padding-bottom: 5px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
 .media-object-ep {
     height: 38px;
     width: 38px;
@@ -19,12 +23,18 @@ body {
 .question-title {
     margin-top: 25px;
 }
+/*sp分割线*/
+.question-sp {
+    margin-top: 0;
+}
 .media-text-ep {
     font-size: 12px;
     font-weight: normal;
     color: #999;
 }
-
+.media-body {
+    padding-top: 10px;
+}
 .profile .section{
     margin-top: 15px;
 }
@@ -43,3 +53,21 @@ body {
 .jumbotron{
     margin: 50px;
 }
+.comment{
+      margin:10px 0px;
+  }
+.btn-comment{
+    float:right;
+    margin-bottom: 10px;
+}
+.menu{
+    margin-top: 5px;
+    color: #999;
+}
+.menu .icon{
+    margin-right:6px ;
+    font-size: 15px;
+    cursor: pointer;
+}.menu .icon:hover{
+     color: #499ef3;
+ }

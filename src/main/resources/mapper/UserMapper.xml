@@ -151,4 +151,14 @@
         from `user`
         where account_id=#{accountId,jdbcType=VARCHAR}
     </select>
+
+  <select id="findInId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>  from `user` where id in
+    <foreach item="item" index="index" collection="userIds" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+
+
+
 </mapper>

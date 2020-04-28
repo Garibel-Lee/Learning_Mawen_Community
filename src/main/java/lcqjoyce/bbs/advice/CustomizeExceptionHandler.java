@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 @ControllerAdvice
@@ -44,11 +45,10 @@ public class CustomizeExceptionHandler {
                 PrintWriter writer = response.getWriter();
                 writer.write(JSON.toJSONString(resultDTO));
                 writer.close();
-            } catch (Exception e1) {
-                e1.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
             return null;
-
         } else {
             //处理错误页面
             if (e instanceof CustomizeException) {

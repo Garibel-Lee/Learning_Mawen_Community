@@ -1,6 +1,10 @@
 package lcqjoyce.bbs.service;
 
+import lcqjoyce.bbs.dto.CommentDTO;
 import lcqjoyce.bbs.entity.Comment;
+
+import java.util.List;
+
 public interface CommentService{
 
 
@@ -16,4 +20,6 @@ public interface CommentService{
 
     int updateByPrimaryKey(Comment record);
 
+
+    List<CommentDTO> findAllByParentIdAndType(Long id);
 }

@@ -26,6 +26,6 @@ public interface UserMapper {
 
     List<User> findByAccountId(@Param("accountId")String accountId);
 
-
+    List<User> findInId(@Param("userIds") List<Long> userIds);
 
 }
