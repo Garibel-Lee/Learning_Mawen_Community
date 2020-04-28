@@ -16,9 +16,30 @@ body {
     height: 38px;
     width: 38px;
 }
-
+.question-title {
+    margin-top: 25px;
+}
 .media-text-ep {
     font-size: 12px;
     font-weight: normal;
     color: #999;
+}
+
+.profile .section{
+    margin-top: 15px;
+}
+
+.community-menu{
+    color: #999;
+    font-size: 13px;
+}
+
+.text-desc {
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+
+.jumbotron{
+    margin: 50px;
 }

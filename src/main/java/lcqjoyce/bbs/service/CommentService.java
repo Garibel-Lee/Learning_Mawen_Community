@@ -6,7 +6,7 @@ public interface CommentService{
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(Comment record);
+    void insert(Comment record);
 
     int insertSelective(Comment record);
 

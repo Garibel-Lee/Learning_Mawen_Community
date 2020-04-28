@@ -8,6 +8,8 @@ import lcqjoyce.bbs.mapper.UserMapper;
 import lcqjoyce.bbs.entity.User;
 import lcqjoyce.bbs.service.UserService;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -38,6 +40,21 @@ public class UserServiceImpl implements UserService {
     public User findByToken(String token) {
         System.out.println("查询该token：" + token + " 是否存在");
         return userMapper.findByToken(token);
+    }
+
+    @Override
+    public void createOrUpdate(User user) {
+        List<User> list=userMapper.findByAccountId(user.getAccountId());
+        if(list.isEmpty()){
+            this.insert(user);
+        }else {
+            list.get(0).setGmtModified(System.currentTimeMillis());
+            list.get(0).setAvatarUrl(user.getAvatarUrl());
+            list.get(0).setName(user.getName());
+            list.get(0).setToken(user.getToken());
+            userMapper.updateByPrimaryKey(list.get(0));
+        }
+
     }
 
 

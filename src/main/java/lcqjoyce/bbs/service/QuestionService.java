@@ -1,6 +1,7 @@
 package lcqjoyce.bbs.service;
 
 import lcqjoyce.bbs.dto.PageinfoDTO;
+import lcqjoyce.bbs.dto.QuestionDTO;
 import lcqjoyce.bbs.entity.Question;
 
 public interface QuestionService{
@@ -12,12 +13,17 @@ public interface QuestionService{
 
     int insertSelective(Question record);
 
-    Question selectByPrimaryKey(Long id);
+    QuestionDTO selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Question record);
 
     int updateByPrimaryKey(Question record);
 
-
     PageinfoDTO getAll(Integer page, Integer size);
+
+    PageinfoDTO listMyQuestion(Long id, Integer page, Integer size);
+
+    void createOrUpdate(Question question);
+
+    void inView(Long id);
 }

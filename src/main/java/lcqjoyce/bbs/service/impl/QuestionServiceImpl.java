@@ -3,6 +3,8 @@ package lcqjoyce.bbs.service.impl;
 import lcqjoyce.bbs.dto.PageinfoDTO;
 import lcqjoyce.bbs.dto.QuestionDTO;
 import lcqjoyce.bbs.entity.User;
+import lcqjoyce.bbs.exception.CustomizeErrorCode;
+import lcqjoyce.bbs.exception.CustomizeException;
 import lcqjoyce.bbs.mapper.UserMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +44,17 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question selectByPrimaryKey(Long id) {
-        return questionMapper.selectByPrimaryKey(id);
+    public QuestionDTO selectByPrimaryKey(Long id) {
+        Question question= questionMapper.selectByPrimaryKey(id);
+        if(question==null || question.equals(null)){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
+        User user = userMapper.findById(question.getCreator());
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question, questionDTO);
+        questionDTO.setUser(user);
+
+        return questionDTO;
     }
 
     @Override
@@ -78,7 +89,7 @@ public class QuestionServiceImpl implements QuestionService {
 
         Integer offset = size * (page - 1);
         //偏移量
-        List<Question> questions = questionMapper.getAll(offset, size);
+        List<Question> questions = questionMapper.getAll(null,offset, size);
         List<QuestionDTO> questionDTOS = new ArrayList<>();
 
         for (Question question : questions) {
@@ -92,6 +103,60 @@ public class QuestionServiceImpl implements QuestionService {
 
 
         return pageinfoDTO;
+    }
+
+    @Override
+    public PageinfoDTO listMyQuestion(Long userId, Integer page, Integer size) {
+
+        PageinfoDTO pageinfoDTO = new PageinfoDTO();
+        Integer totalCount = questionMapper.countByCreator(userId);
+        Integer totalPage;
+        if (totalCount % size == 0) {
+            totalPage = totalCount / size;
+        } else {
+            totalPage = totalCount / size + 1;
+        }
+
+        if (page < 1) {
+            page = 1;
+        }
+        if (page > totalPage) {
+            page = totalPage;
+        }
+        pageinfoDTO.setPageinfo(totalPage, page);
+
+        Integer offset = size * (page - 1);
+        //偏移量
+        List<Question> questions = questionMapper.getAll(userId,offset, size);
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+
+        for (Question question : questions) {
+            User user = userMapper.findById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question, questionDTO);
+            questionDTO.setUser(user);
+            questionDTOS.add(questionDTO);
+        }
+        pageinfoDTO.setQuestionS(questionDTOS);
+
+
+        return pageinfoDTO;
+    }
+
+    @Override
+    public void createOrUpdate(Question question) {
+        if(question.getId()==null){
+            questionMapper.insert(question);
+        }else {
+            question.setGmtModified(System.currentTimeMillis());
+            questionMapper.updateByPrimaryKey(question);
+        }
+    }
+
+    @Override
+    public void inView(Long id) {
+        Question question=questionMapper.selectByPrimaryKey(id);
+         questionMapper.updateViewByPrimaryKey(question);
     }
 
 }

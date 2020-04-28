@@ -24,5 +24,8 @@ public interface UserMapper {
 
     User findById(@Param("id")Long id);
 
+    List<User> findByAccountId(@Param("accountId")String accountId);
+
+
 
 }

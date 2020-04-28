@@ -1,5 +1,6 @@
 package lcqjoyce.bbs.controller;
 
+import lcqjoyce.bbs.dto.QuestionDTO;
 import lcqjoyce.bbs.entity.Question;
 import lcqjoyce.bbs.entity.User;
 import lcqjoyce.bbs.service.QuestionService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,6 +22,24 @@ public class PublishController {
     @Autowired
     private QuestionService questionService;
 
+
+    @GetMapping("/publish/{id}")
+    public String edit(@PathVariable(name="id")Long id,HttpServletRequest request,
+                           Model model){
+        QuestionDTO questionDTO = questionService.selectByPrimaryKey(id);
+        User user = (User) request.getSession().getAttribute("user");
+        if(user.getId().equals(questionDTO.getUser().getId())){
+            model.addAttribute("question",questionDTO);
+            model.addAttribute("title", questionDTO.getTitle());
+            model.addAttribute("description", questionDTO.getDescription());
+            model.addAttribute("tag", questionDTO.getTag());
+            model.addAttribute("id", questionDTO.getId());
+            return "publish";
+        }else {
+            return "redirect:/";
+        }
+
+    }
 
     @GetMapping("/publish")
     public String publish(){
@@ -51,17 +71,18 @@ public class PublishController {
             return "publish";
         }
 
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            model.addAttribute("error", "用户未登录");
+            return "publish";
+        }
+
       /*  String invalid = TagCache.filterInvalid(tag);
         if (StringUtils.isNotBlank(invalid)) {
             model.addAttribute("error", "输入非法标签:" + invalid);
             return "publish";
         }*/
 
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
-            model.addAttribute("error", "用户未登录");
-            return "publish";
-        }
 
         Question question = new Question();
         question.setTitle(title);
@@ -71,7 +92,9 @@ public class PublishController {
         question.setGmtCreate(System.currentTimeMillis());
         question.setGmtModified(question.getGmtCreate());
         question.setId(id);
-        System.out.println("questionService.insert结果："+questionService.insert(question));
+        questionService.createOrUpdate(question);
+
+
         return "redirect:/";
     }
 

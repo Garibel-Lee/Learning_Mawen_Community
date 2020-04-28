@@ -20,10 +20,17 @@ public interface QuestionMapper {
 
     int updateByPrimaryKey(Question record);
 
-    List<Question> getAll(@Param("offset")Integer offset,@Param("size") Integer size);
+   // List<Question> getAll(@Param("offset")Integer offset,@Param("size") Integer size);
 
     Integer count();
 
+    void updateCommentCount(Long id);
 
+    List<Question> getAll(@Param("userId")Long userId,@Param("offset")Integer offset,@Param("size") Integer size);
+
+
+    Integer countByCreator(@Param("creator")Long creator);
+
+    int updateViewByPrimaryKey(Question record);
 
 }

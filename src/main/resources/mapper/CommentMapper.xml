@@ -34,11 +34,10 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="lcqjoyce.bbs.entity.Comment" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into `comment` (parent_id, `type`, commentator, 
-      gmt_create, gmt_modified, like_count, 
-      content, comment_count)
+      gmt_create, gmt_modified,content)
     values (#{parentId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{commentator,jdbcType=BIGINT}, 
-      #{gmtCreate,jdbcType=BIGINT}, #{gmtModified,jdbcType=BIGINT}, #{likeCount,jdbcType=BIGINT}, 
-      #{content,jdbcType=VARCHAR}, #{commentCount,jdbcType=INTEGER})
+      #{gmtCreate,jdbcType=BIGINT}, #{gmtModified,jdbcType=BIGINT},
+      #{content,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="lcqjoyce.bbs.entity.Comment" useGeneratedKeys="true">
     <!--@mbg.generated-->

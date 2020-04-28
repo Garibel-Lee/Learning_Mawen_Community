@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
-
 <body>
-
 <div th:fragment="nav">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -38,12 +35,12 @@
                         <ul class="dropdown-menu">
                             <li><a href="#">消息中心</a></li>
                             <li><a href="/profile/questions">我的问题</a></li>
-                            <li><a href="#">退出登陆</a></li>
+                            <li><a href="/loginout">退出登陆</a></li>
                         </ul>
                     </li>
 
                     <li th:if="${session.user==null}"><a
-                            href="https://github.com/login/oauth/authorize?client_id=88048ff3801fcb6f267e&redirect_uri=&scope=user&state=1">登录</a>
+                            href="https://github.com/login/oauth/authorize?client_id=353705c353a909271afe&redirect_uri=&scope=user&state=1">登录</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

@@ -1,5 +1,6 @@
 package lcqjoyce.bbs.controller;
 
+import lcqjoyce.bbs.dto.PageinfoDTO;
 import lcqjoyce.bbs.entity.User;
 import lcqjoyce.bbs.service.NotificationService;
 import lcqjoyce.bbs.service.QuestionService;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by codedrinker on 2019/5/15.
- */
+
 @Controller
 public class ProfileController {
     @Autowired
@@ -27,7 +26,7 @@ public class ProfileController {
                           @PathVariable(name = "action") String action,
                           Model model,
                           @RequestParam(name = "page", defaultValue = "1") Integer page,
-                          @RequestParam(name = "size", defaultValue = "5") Integer size) {
+                          @RequestParam(name = "size", defaultValue = "2") Integer size) {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
@@ -44,7 +43,12 @@ public class ProfileController {
             model.addAttribute("section", "replies");
             model.addAttribute("pagination", paginationDTO);*/
             model.addAttribute("sectionName", "最新回复");
-        }
+        }else if ("replies".equals(action) ){
+           model.addAttribute("section", "replies");
+           model.addAttribute("sectionName", "我的回复");
+       }
+        PageinfoDTO pageinfoDTO = questionService.listMyQuestion(user.getId(), page, size);
+        model.addAttribute("pagination", pageinfoDTO);
         return "profile";
     }
 }

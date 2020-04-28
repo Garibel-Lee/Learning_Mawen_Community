@@ -24,38 +24,13 @@ public class IndexController {
 
     @Autowired
     private UserService userService;
-
-
     @Autowired
     private QuestionService questionService;
-
-
     @GetMapping("/")
-    public String index(HttpServletRequest request, Model model,
+    public String index(Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
-                        @RequestParam(name = "size", defaultValue = "2") Integer size
-
-    ) {
-        try {
-            Cookie[] cookies = request.getCookies();
-            if (cookies != null && cookies.length != 0) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("token")) {
-                        String value = cookie.getValue();
-                        User user = userService.findByToken(value);
-                        if (user != null) {
-                            System.out.println("已有登录用户" + user.getName());
-                            request.getSession().setAttribute("user", user);
-                        }
-                        break;
-                    }
-                }
-            }
-        } catch (NullPointerException e) {
-            System.out.println("未登录");
-        }
-
-       PageinfoDTO pagination = questionService.getAll(page,size);
+                        @RequestParam(name = "size", defaultValue = "5") Integer size) {
+        PageinfoDTO pagination = questionService.getAll(page, size);
         model.addAttribute("pagination", pagination);
         return "index";
     }

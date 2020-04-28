@@ -15,6 +15,7 @@ public interface UserService {
 
     User findByToken(String token);
 
+    void createOrUpdate(User user);
 
     int updateByPrimaryKeySelective(User record);
 
