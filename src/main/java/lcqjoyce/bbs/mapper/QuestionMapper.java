@@ -33,4 +33,5 @@ public interface QuestionMapper {
 
     int updateViewByPrimaryKey(Question record);
 
+    List<Question>  selectRelated(Question question);
 }

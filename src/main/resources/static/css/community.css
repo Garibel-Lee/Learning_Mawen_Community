@@ -69,6 +69,10 @@ body {
     color: #999;
 }
 
+.question-wechat {
+    width: 60%;
+}
+
 .jumbotron {
     margin: 50px;
 }
@@ -92,10 +96,42 @@ body {
     font-size: 15px;
     cursor: pointer;
 }
+
 .menu .active {
+    color: #499ef3;
+}
+
+.menu .comment-icon {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu .comment-icon:hover {
     color: #499ef3;
 }
 
 .menu .icon:hover {
     color: #499ef3;
+}
+
+.question-tag {
+    margin-right: 5px;
+}
+
+.question-related {
+    line-height: 20px;
+    font-size: 12px;
+    margin-left: 0;
+    list-style: none;
+    padding-left: 0px;
+}
+.publish-tag-tab {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.publish-tag-tab .label-info {
+    white-space: normal;
+    margin: 5px 5px;
+    display: inline-block;
 }

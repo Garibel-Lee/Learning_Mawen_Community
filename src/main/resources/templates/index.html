@@ -36,7 +36,7 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">
-                        <a th:href="@{'question/'+${question.id}}" th:text="${question.title}"></a>
+                        <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
                     </h4>
                     <span th:text="${question.description}"></span><br>
                     <span class="text-desc">
@@ -44,7 +44,7 @@
                     <span class="media-text-ep" th:text="${question.commentCount}"></span>个回复 •
                     <span class="media-text-ep" th:text="${question.viewCount}"></span>次浏览
                         <span class="media-text-ep"
-                              th:text="${#dates.format(question.gmtModified,'yyyy-MM-dd HH:mm:ss')}"></span>
+                              th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm:ss')}"></span>
                     </span>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                         </a>
                     </li>
 
-                    <li th:class="${pagination.page==page} ?'active' : '' " th:each="page :${pagination.pages}">
+                    <li th:class="${pagination.page==page} ? 'active' " th:each="page :${pagination.pages}">
                         <a th:href="@{/(page=${page})}"
                            th:text="${page}"></a></li>
                     <li th:if="${pagination.showNext}">

@@ -6,6 +6,7 @@ import lcqjoyce.bbs.entity.User;
 import lcqjoyce.bbs.exception.CustomizeErrorCode;
 import lcqjoyce.bbs.exception.CustomizeException;
 import lcqjoyce.bbs.mapper.UserMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,10 @@ import lcqjoyce.bbs.entity.Question;
 import lcqjoyce.bbs.service.QuestionService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -45,8 +49,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionDTO selectByPrimaryKey(Long id) {
-        Question question= questionMapper.selectByPrimaryKey(id);
-        if(question==null || question.equals(null)){
+        Question question = questionMapper.selectByPrimaryKey(id);
+        if (question == null || question.equals(null)) {
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
         }
         User user = userMapper.findById(question.getCreator());
@@ -89,7 +93,7 @@ public class QuestionServiceImpl implements QuestionService {
 
         Integer offset = size * (page - 1);
         //偏移量
-        List<Question> questions = questionMapper.getAll(null,offset, size);
+        List<Question> questions = questionMapper.getAll(null, offset, size);
         List<QuestionDTO> questionDTOS = new ArrayList<>();
 
         for (Question question : questions) {
@@ -127,7 +131,7 @@ public class QuestionServiceImpl implements QuestionService {
 
         Integer offset = size * (page - 1);
         //偏移量
-        List<Question> questions = questionMapper.getAll(userId,offset, size);
+        List<Question> questions = questionMapper.getAll(userId, offset, size);
         List<QuestionDTO> questionDTOS = new ArrayList<>();
 
         for (Question question : questions) {
@@ -145,9 +149,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void createOrUpdate(Question question) {
-        if(question.getId()==null){
+        if (question.getId() == null) {
             questionMapper.insert(question);
-        }else {
+        } else {
             question.setGmtModified(System.currentTimeMillis());
             questionMapper.updateByPrimaryKey(question);
         }
@@ -155,8 +159,28 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void inView(Long id) {
-        Question question=questionMapper.selectByPrimaryKey(id);
-         questionMapper.updateViewByPrimaryKey(question);
+        Question question = questionMapper.selectByPrimaryKey(id);
+        questionMapper.updateViewByPrimaryKey(question);
+    }
+
+    @Override
+    public List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
+        if (StringUtils.isBlank(queryDTO.getTag())) {
+            return new ArrayList<>();
+        }
+        String[] tags = StringUtils.split(queryDTO.getTag(), ",");
+        String regexTag = Arrays.stream(tags).collect(Collectors.joining("|"));
+        Question question=new Question();
+        question.setId(queryDTO.getId());
+        question.setTag(regexTag);
+
+        List<Question> questions = questionMapper.selectRelated(question);
+        List<QuestionDTO> questionDTOS=questions.stream().map(q->{
+           QuestionDTO questionDTO=new QuestionDTO();
+           BeanUtils.copyProperties(q,questionDTO);
+           return questionDTO;
+        }).collect(Collectors.toList());
+        return questionDTOS;
     }
 
 }

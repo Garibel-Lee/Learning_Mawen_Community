@@ -4,6 +4,8 @@ import lcqjoyce.bbs.dto.PageinfoDTO;
 import lcqjoyce.bbs.dto.QuestionDTO;
 import lcqjoyce.bbs.entity.Question;
 
+import java.util.List;
+
 public interface QuestionService{
 
 
@@ -26,4 +28,6 @@ public interface QuestionService{
     void createOrUpdate(Question question);
 
     void inView(Long id);
+
+    List<QuestionDTO> selectRelated(QuestionDTO questionDTO);
 }

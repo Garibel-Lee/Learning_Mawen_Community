@@ -52,7 +52,7 @@
                         </a>
                     </li>
 
-                    <li th:class="${pagination.page==page} ?'active' : '' " th:each="page :${pagination.pages}">
+                    <li th:class="${pagination.page==page} ? 'active'  " th:each="page :${pagination.pages}">
                         <a th:href="@{'/profile/'+${section}(page=${page})}"
                            th:text="${page}"></a></li>
                     <li th:if="${pagination.showNext}">
@@ -71,13 +71,13 @@
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
 
             <div class="list-group section">
-                <a href="/profile/questions" th:class="${section =='questions'} ?'list-group-item active' : 'list-group-item' ">我的问题 <span
+                <a href="/profile/questions" th:class="${section =='questions'} ? 'list-group-item active' : 'list-group-item' ">我的问题 <span
                         class="badge">14</span></a>
                 <a href="#"
-                   th:class="${section =='save'} ?    'list-group-item active' :     'list-group-item' ">我的收藏<span
+                   th:class="${section =='save'} ?    'list-group-item active' :     'list-group-item'  ">我的收藏<span
                         class="badge">14</span></a>
                 <a href="/profile/replies"
-                   th:class="${section =='replies'} ?   'list-group-item active' :    'list-group-item' ">最新回复<span
+                   th:class="${section =='replies' }?   'list-group-item active' :    'list-group-item' ">最新回复<span
                         class="badge">14</span></a>
                 <a href="#" th:class="${section =='persion'} ? 'list-group-item active' :  'list-group-item' ">个人资料<span
                         class="badge">14</span></a>

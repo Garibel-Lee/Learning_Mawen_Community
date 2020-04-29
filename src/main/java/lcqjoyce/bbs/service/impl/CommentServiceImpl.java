@@ -57,6 +57,7 @@ public class CommentServiceImpl implements CommentService {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
             commentMapper.insert(record);
+            commentMapper.updateCommentCount(record.getParentId());
         } else {
             //回复问题 db: type :1
             Question question = questionMapper.selectByPrimaryKey(record.getParentId());

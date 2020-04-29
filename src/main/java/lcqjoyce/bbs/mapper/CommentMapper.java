@@ -21,5 +21,6 @@ public interface CommentMapper {
 
     List<Comment> findAllByParentIdAndType(@Param("parentId")Long parentId,@Param("type")Integer type);
 
+    int  updateCommentCount(Long id);
 
 }
