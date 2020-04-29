@@ -90,8 +90,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDTO> findAllByParentIdAndType(Long id) {
-        List<Comment> comments = commentMapper.findAllByParentIdAndType(id, CommentTypeEnum.QUSTION.getType());
+    public List<CommentDTO> findAllByParentIdAndType(Long id, CommentTypeEnum commentType) {
+        List<Comment> comments = commentMapper.findAllByParentIdAndType(id, commentType.getType());
         if (comments.size() == 0) {
             return new ArrayList<>();
         }

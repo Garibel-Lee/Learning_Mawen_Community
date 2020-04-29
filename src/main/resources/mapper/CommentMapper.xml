@@ -146,5 +146,6 @@
         <include refid="Base_Column_List"/>
         from `comment`
         where parent_id=#{parentId,jdbcType=BIGINT} and `type`=#{type,jdbcType=INTEGER}
+         order by gmt_create desc
     </select>
 </mapper>

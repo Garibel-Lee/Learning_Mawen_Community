@@ -2,6 +2,7 @@ package lcqjoyce.bbs.service;
 
 import lcqjoyce.bbs.dto.CommentDTO;
 import lcqjoyce.bbs.entity.Comment;
+import lcqjoyce.bbs.enums.CommentTypeEnum;
 
 import java.util.List;
 
@@ -21,5 +22,7 @@ public interface CommentService{
     int updateByPrimaryKey(Comment record);
 
 
-    List<CommentDTO> findAllByParentIdAndType(Long id);
+    List<CommentDTO> findAllByParentIdAndType(Long id, CommentTypeEnum commentType);
+
+
 }
