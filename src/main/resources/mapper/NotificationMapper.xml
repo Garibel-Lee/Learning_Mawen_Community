@@ -1,142 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lcqjoyce.bbs.mapper.NotificationMapper">
-  <resultMap id="BaseResultMap" type="lcqjoyce.bbs.entity.Notification">
-    <!--@mbg.generated-->
-    <!--@Table notification-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="notifier" jdbcType="BIGINT" property="notifier" />
-    <result column="receiver" jdbcType="BIGINT" property="receiver" />
-    <result column="outerid" jdbcType="BIGINT" property="outerid" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="notifier_name" jdbcType="VARCHAR" property="notifierName" />
-    <result column="outer_title" jdbcType="VARCHAR" property="outerTitle" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, notifier, receiver, outerid, `type`, gmt_create, `status`, notifier_name, outer_title
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from notification
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from notification
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="lcqjoyce.bbs.entity.Notification" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into notification (notifier, receiver, outerid, 
-      `type`, gmt_create, `status`, 
-      notifier_name, outer_title)
-    values (#{notifier,jdbcType=BIGINT}, #{receiver,jdbcType=BIGINT}, #{outerid,jdbcType=BIGINT}, 
-      #{type,jdbcType=INTEGER}, #{gmtCreate,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, 
-      #{notifierName,jdbcType=VARCHAR}, #{outerTitle,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="lcqjoyce.bbs.entity.Notification" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into notification
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="notifier != null">
-        notifier,
-      </if>
-      <if test="receiver != null">
-        receiver,
-      </if>
-      <if test="outerid != null">
-        outerid,
-      </if>
-      <if test="type != null">
-        `type`,
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create,
-      </if>
-      <if test="status != null">
-        `status`,
-      </if>
-      <if test="notifierName != null">
-        notifier_name,
-      </if>
-      <if test="outerTitle != null">
-        outer_title,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="notifier != null">
-        #{notifier,jdbcType=BIGINT},
-      </if>
-      <if test="receiver != null">
-        #{receiver,jdbcType=BIGINT},
-      </if>
-      <if test="outerid != null">
-        #{outerid,jdbcType=BIGINT},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="gmtCreate != null">
-        #{gmtCreate,jdbcType=BIGINT},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="notifierName != null">
-        #{notifierName,jdbcType=VARCHAR},
-      </if>
-      <if test="outerTitle != null">
-        #{outerTitle,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="lcqjoyce.bbs.entity.Notification">
-    <!--@mbg.generated-->
-    update notification
-    <set>
-      <if test="notifier != null">
-        notifier = #{notifier,jdbcType=BIGINT},
-      </if>
-      <if test="receiver != null">
-        receiver = #{receiver,jdbcType=BIGINT},
-      </if>
-      <if test="outerid != null">
-        outerid = #{outerid,jdbcType=BIGINT},
-      </if>
-      <if test="type != null">
-        `type` = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="gmtCreate != null">
-        gmt_create = #{gmtCreate,jdbcType=BIGINT},
-      </if>
-      <if test="status != null">
-        `status` = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="notifierName != null">
-        notifier_name = #{notifierName,jdbcType=VARCHAR},
-      </if>
-      <if test="outerTitle != null">
-        outer_title = #{outerTitle,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="lcqjoyce.bbs.entity.Notification">
-    <!--@mbg.generated-->
-    update notification
-    set notifier = #{notifier,jdbcType=BIGINT},
-      receiver = #{receiver,jdbcType=BIGINT},
-      outerid = #{outerid,jdbcType=BIGINT},
-      `type` = #{type,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=BIGINT},
-      `status` = #{status,jdbcType=INTEGER},
-      notifier_name = #{notifierName,jdbcType=VARCHAR},
-      outer_title = #{outerTitle,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <resultMap id="BaseResultMap" type="lcqjoyce.bbs.entity.Notification">
+        <!--@mbg.generated-->
+        <!--@Table notification-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="notifier" jdbcType="BIGINT" property="notifier"/>
+        <result column="receiver" jdbcType="BIGINT" property="receiver"/>
+        <result column="outerid" jdbcType="BIGINT" property="outerid"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="notifier_name" jdbcType="VARCHAR" property="notifierName"/>
+        <result column="outer_title" jdbcType="VARCHAR" property="outerTitle"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, notifier, receiver, outerid, `type`, gmt_create, `status`, notifier_name, outer_title
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from notification
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from notification
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="lcqjoyce.bbs.entity.Notification"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into notification (notifier, receiver, outerid,
+        `type`, gmt_create, `status`,
+        notifier_name, outer_title)
+        values (#{notifier,jdbcType=BIGINT}, #{receiver,jdbcType=BIGINT}, #{outerid,jdbcType=BIGINT},
+        #{type,jdbcType=INTEGER}, #{gmtCreate,jdbcType=BIGINT}, #{status,jdbcType=INTEGER},
+        #{notifierName,jdbcType=VARCHAR}, #{outerTitle,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="lcqjoyce.bbs.entity.Notification"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into notification
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="notifier != null">
+                notifier,
+            </if>
+            <if test="receiver != null">
+                receiver,
+            </if>
+            <if test="outerid != null">
+                outerid,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="notifierName != null">
+                notifier_name,
+            </if>
+            <if test="outerTitle != null">
+                outer_title,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="notifier != null">
+                #{notifier,jdbcType=BIGINT},
+            </if>
+            <if test="receiver != null">
+                #{receiver,jdbcType=BIGINT},
+            </if>
+            <if test="outerid != null">
+                #{outerid,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="notifierName != null">
+                #{notifierName,jdbcType=VARCHAR},
+            </if>
+            <if test="outerTitle != null">
+                #{outerTitle,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="lcqjoyce.bbs.entity.Notification">
+        <!--@mbg.generated-->
+        update notification
+        <set>
+            <if test="notifier != null">
+                notifier = #{notifier,jdbcType=BIGINT},
+            </if>
+            <if test="receiver != null">
+                receiver = #{receiver,jdbcType=BIGINT},
+            </if>
+            <if test="outerid != null">
+                outerid = #{outerid,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="notifierName != null">
+                notifier_name = #{notifierName,jdbcType=VARCHAR},
+            </if>
+            <if test="outerTitle != null">
+                outer_title = #{outerTitle,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="lcqjoyce.bbs.entity.Notification">
+        <!--@mbg.generated-->
+        update notification
+        set
+        `status` = #{status}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!--auto generated by MybatisCodeHelper on 2020-04-30-->
+    <select id="countById" resultType="Integer">
+        select count(1)
+        from notification
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="listMyNotification" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from notification
+        where 1=1
+        <if test="receiverId != null">and receiver=#{receiverId}</if>
+        ORDER BY gmt_create
+        DESC limit #{offset} ,#{size}
+
+
+    </select>
+    <select id="selectUnreadCount" resultType="java.lang.Long">
+        select
+       count(1)
+        from notification
+        where status = 0
+        and  receiver=#{id,jdbcType=BIGINT}
+        ORDER BY gmt_create
+
+
+    </select>
+
 </mapper>

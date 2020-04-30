@@ -8,6 +8,7 @@ import lcqjoyce.bbs.entity.User;
 import lcqjoyce.bbs.enums.CommentTypeEnum;
 import lcqjoyce.bbs.exception.CustomizeErrorCode;
 import lcqjoyce.bbs.service.CommentService;
+import lcqjoyce.bbs.service.NotificationService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,8 @@ import java.util.List;
 @Controller
 public class CommentController {
 
-
+    @Autowired
+    private NotificationService notificationService;
 
     @Autowired
     private CommentService commentService;
@@ -42,11 +44,12 @@ public class CommentController {
         comment.setGmtModified(System.currentTimeMillis());
         comment.setContent(commentCreateDTO.getContent());
         comment.setCommentator(user.getId());
-        commentService.insert(comment);
+        commentService.insert(comment,user);
+
         return ResultDTO.okof();
     }
 
-//泛型运行
+    //泛型运行
     @ResponseBody
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
     public ResultDTO<List<CommentDTO>> comments(@PathVariable(name="id") Long id ){

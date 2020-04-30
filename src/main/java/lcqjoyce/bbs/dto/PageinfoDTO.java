@@ -1,14 +1,14 @@
 package lcqjoyce.bbs.dto;
 
-import lcqjoyce.bbs.entity.Question;
+
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class PageinfoDTO {
-    private List<QuestionDTO> questionS;
+public class PageinfoDTO<T> {
+    private List<T> data;
     private Integer page;
     private Boolean showPrevious;
     private Boolean showNext;

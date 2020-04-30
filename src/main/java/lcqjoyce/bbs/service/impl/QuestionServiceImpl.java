@@ -74,7 +74,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public PageinfoDTO getAll(Integer page, Integer size) {
 
-        PageinfoDTO pageinfoDTO = new PageinfoDTO();
+        PageinfoDTO<QuestionDTO> pageinfoDTO = new PageinfoDTO();
         Integer totalCount = questionMapper.count();
         Integer totalPage;
         if (totalCount % size == 0) {
@@ -103,7 +103,7 @@ public class QuestionServiceImpl implements QuestionService {
             questionDTO.setUser(user);
             questionDTOS.add(questionDTO);
         }
-        pageinfoDTO.setQuestionS(questionDTOS);
+        pageinfoDTO.setData(questionDTOS);
 
 
         return pageinfoDTO;
@@ -112,7 +112,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public PageinfoDTO listMyQuestion(Long userId, Integer page, Integer size) {
 
-        PageinfoDTO pageinfoDTO = new PageinfoDTO();
+        PageinfoDTO<QuestionDTO> pageinfoDTO = new PageinfoDTO();
         Integer totalCount = questionMapper.countByCreator(userId);
         Integer totalPage;
         if (totalCount % size == 0) {
@@ -141,7 +141,7 @@ public class QuestionServiceImpl implements QuestionService {
             questionDTO.setUser(user);
             questionDTOS.add(questionDTO);
         }
-        pageinfoDTO.setQuestionS(questionDTOS);
+        pageinfoDTO.setData(questionDTOS);
 
 
         return pageinfoDTO;

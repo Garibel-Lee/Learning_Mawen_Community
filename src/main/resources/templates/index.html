@@ -27,7 +27,7 @@
             <h2><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> 发起</h2>
             <hr>
 
-            <div class="media" th:each="question: ${pagination.getQuestionS()}">
+            <div class="media" th:each="question: ${pagination.getData()}">
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object img-circle media-object-ep" th:src="${question.user.avatarUrl}"
